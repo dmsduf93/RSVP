@@ -31,65 +31,22 @@
 
         .background-container {
           position: relative;
-          width: 80vw;  /* Ensure the container is in portrait orientation */
+          width: 80vw;
           height: 100vh;
-          background-image: url('main_background.png'); /* Add your image URL here */
-          background-size: contain; /* Ensures the image maintains its aspect ratio */
+          background-image: url('main_background.png');
+          background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
           background-attachment: fixed;
-          overflow: hidden;  /* Ensures flowers don't spill outside this container */
+          overflow: hidden;
           display: flex;
-          flex-direction: column; /* Stack the elements vertically */
+          flex-direction: column;
           justify-content: center;
-          align-items: center; /* Center the content vertically */
+          align-items: center;
         }
 
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: inline-block;
-            text-align: left;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input, textarea, button {
-            width: 300px; /* Set a fixed width */
-            padding: 15px; /* Add more padding for a larger typing area */
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        textarea {
-            height: 150px; /* Increase the height for a larger message box */
-            resize: vertical; /* Allow the user to resize the textarea */
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-          
         .falling-flower {
-          position: absolute; /* Make sure it is relative to the background-container */
+          position: absolute;
           top: -10px;
           animation: fall 10s infinite linear;
         }
@@ -105,20 +62,73 @@
           }
         }
 
-        /* Add space between the text and the buttons */
-        .title-container {
-          margin-top: 120px; /* Adjust space between text and buttons */
-          /*margin-bottom: 20px; /* Adjust space between text and buttons */
-          font-family: 'Noto Serif KR', serif;
-          font-size: 25px;
-          text-align: center; /* Optional: Center the text */
+        .flower-btn {
+          padding: 15px 30px;
+          font-size: 18px;
+          margin: 10px;
+          border: none;
+          background-color: #FF69B4;
+          color: white;
+          font-weight: bold;
+          border-radius: 8px;
+          cursor: pointer;
         }
-        /* Add space between the text and the buttons */
-        .text-container {
-          margin-bottom: 20px; /* Adjust space between text and buttons */
+
+        .flower-btn:hover {
+          background-color: #FF1493;
+        }
+
+        .title-container, .text-container {
+          margin-bottom: 20px;
           font-family: 'Noto Serif KR', serif;
+          text-align: center;
+        }
+
+        .title-container {
+          font-size: 25px;
+        }
+
+        .text-container {
           font-size: 20px;
-          text-align: center; /* Optional: Center the text */
+        }
+
+        /* Contact form styles */
+        .contact-form-container {
+          position: relative;
+          margin-top: 20px;
+          background-color: rgba(255, 255, 255, 0.8);
+          padding: 20px;
+          border-radius: 10px;
+          width: 300px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form-container label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+        }
+
+        .contact-form-container input, .contact-form-container textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 12px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        .contact-form-container button {
+          width: 100%;
+          padding: 10px;
+          background-color: #FF69B4;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+
+        .contact-form-container button:hover {
+          background-color: #FF1493;
         }
       </style>
    </head>
@@ -126,16 +136,29 @@
    <body>
       <div class="background-container">
          <div class="title-container">
-            <h2>참석 여부 전달 안내</h2>
-            <div class="text-container">
-               <p>
-                  특별한 날 축하의 마음으로 참석해주시는<br />
-                  모든 분들을 더욱 귀하게 모실 수 있도록<br />
-                  아래 기입란을 제출하여 신랑•신부에게<br />
-                  참석여부를 전달 부탁드립니다.<br />
-                  참석하시는 모든 분의 성함을 기입 부탁드립니다.<br />
-               </p>
-            </div>
+            <p>
+               이라미, 김은열의 결혼식에<br />
+               초대합니다.
+            </p>
+         </div>
+         <div class="text-container">
+            <p>
+               05/03/2025, 11AM
+            </p>
+         </div>
+         <div class="text-container">
+            <p>
+               Tapestry House by<br />
+               Wedgewood Weddings
+            </p>
+         </div>
+         <div class="button-container">
+            <button class="flower-btn" onclick="window.location.href='https://dmsduf93.github.io/Wedding-invitation-Kor/'">한국어</button>
+            <button class="flower-btn" onclick="window.location.href='https://dmsduf93.github.io/Wedding-invitation-Eng/'">English</button>
+         </div>
+
+         <!-- Contact Form Section -->
+         <div class="contact-form-container">
             <form id="contact-form">
                 <label for="name">성함:</label>
                 <input type="text" id="name" name="name" required><br>
@@ -146,61 +169,19 @@
                 <label for="message">전하고싶으신 말:</label>
                 <textarea id="message" name="message" required></textarea><br>
             
-                <button type="제출">Submit</button>
+                <button type="submit">Submit</button>
             </form>
          </div>
       </div>
 
+      <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
       <script>
-        // Create falling flowers
-        const flowerImages = [
-          "flower.png", // Flower icon image URL
-        ];
-      
-        function createFallingFlower() {
-          const flower = document.createElement("img");
-          flower.src = flowerImages[0];
-          flower.classList.add("falling-flower");
-      
-          // Set random size for each flower (for variety)
-          const flowerSize = Math.random() * 5 + 8; // Random size between 10px and 40px
-          flower.style.width = `${flowerSize}px`; 
-          flower.style.height = `${flowerSize}px`;
-      
-          // Get the width of the container and randomize the flower's horizontal position inside it
-          const container = document.querySelector('.background-container');
-          const containerWidth = container.offsetWidth;
-          flower.style.left = `${Math.random() * containerWidth}px`;  // Random horizontal position within container
-
-          // Set a random speed for each flower's falling animation
-          flower.style.animationDuration = `${Math.random() * 5 + 5}s`;  // Random speed between 5s and 10s
-
-          container.appendChild(flower);
-      
-          // Remove the flower when it has finished falling
-          flower.addEventListener("animationiteration", () => {
-            flower.remove();
-          });
-        }
-      
-        // Create flowers at regular intervals
-        setInterval(createFallingFlower, 200);
-      </script>
-
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
         // Initialize EmailJS
-        emailjs.init('zNlaqaX53MJFOmei0'); // Replace YOUR_USER_ID with your EmailJS user ID
+        emailjs.init('zNlaqaX53MJFOmei0'); // Replace with your EmailJS user ID
 
         // Handle form submission
         document.getElementById('contact-form').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the form from submitting the traditional way
-
-            // Get form values
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const number = formData.get('number');
-            const message = formData.get('message');
 
             // Send email using EmailJS
             emailjs.sendForm('service_4n7zide', 'template_8new6yf', this)
@@ -212,7 +193,42 @@
                     alert('오류가 발생하였습니다.');
                 });
         });
-    </script>
+      </script>
+      
+      <script>
+        // Create falling flowers
+        const flowerImages = [
+          "flower.png", // Flower icon image URL
+        ];
 
+        function createFallingFlower() {
+          const flower = document.createElement("img");
+          flower.src = flowerImages[0];
+          flower.classList.add("falling-flower");
+
+          // Set random size for each flower (for variety)
+          const flowerSize = Math.random() * 5 + 8; // Random size between 10px and 40px
+          flower.style.width = `${flowerSize}px`; 
+          flower.style.height = `${flowerSize}px`;
+
+          // Get the width of the container and randomize the flower's horizontal position inside it
+          const container = document.querySelector('.background-container');
+          const containerWidth = container.offsetWidth;
+          flower.style.left = `${Math.random() * containerWidth}px`;  // Random horizontal position within container
+
+          // Set a random speed for each flower's falling animation
+          flower.style.animationDuration = `${Math.random() * 5 + 5}s`;  // Random speed between 5s and 10s
+
+          container.appendChild(flower);
+
+          // Remove the flower when it has finished falling
+          flower.addEventListener("animationiteration", () => {
+            flower.remove();
+          });
+        }
+
+        // Create flowers at regular intervals
+        setInterval(createFallingFlower, 200);
+      </script>
    </body>
 </html>
