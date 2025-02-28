@@ -68,14 +68,6 @@
           text-align: center;
         }
 
-        .title-container {
-          font-size: 20px;
-        }
-
-        .text-container {
-          font-size: 15px;
-        }
-
         /* Contact form styles */
         .contact-form-container {
           position: relative;
@@ -114,6 +106,27 @@
         .contact-form-container button:hover {
           background-color: #FF1493;
         }
+            /* Media query for mobile (up to 1023px) */
+         @media (max-width: 1023px) {
+           .title-container {
+             font-size: 20px;
+           }
+   
+           .text-container {
+             font-size: 15px;
+           }
+         }
+         
+         /* Optional: Adjust text sizes on larger screens if needed */
+         @media (min-width: 1024px) {
+           .title-container {
+             font-size: 25px;
+           }
+   
+           .text-container {
+             font-size: 20px;
+           }
+         }
       </style>
    </head>
 
