@@ -76,6 +76,7 @@
             if (enteredPassword === password) {
                 document.getElementById('dataContainer').style.display = "block";
                 alert("Password correct! You can now view the submitted data.");
+                loadData(); // Load the stored data after password is entered
             } else {
                 alert("Incorrect password! Please try again.");
             }
@@ -88,25 +89,49 @@
             const message = document.getElementById('message').value;
 
             if (name && number && message) {
-                const dataEntry = document.createElement('div');
-                dataEntry.classList.add('data-entry');
-
-                dataEntry.innerHTML = `
-                    <strong>Name:</strong> ${name}<br>
-                    <strong>Number:</strong> ${number}<br>
-                    <strong>Message:</strong> ${message}
-                `;
-
-                document.getElementById('dataEntries').appendChild(dataEntry);
+                const entry = { name, number, message };
+                let storedData = JSON.parse(localStorage.getItem('submittedData')) || [];
+                storedData.push(entry);
+                localStorage.setItem('submittedData', JSON.stringify(storedData));
 
                 // Clear form fields after submission
                 document.getElementById('name').value = '';
                 document.getElementById('number').value = '';
                 document.getElementById('message').value = '';
+
+                // Load and display the updated data
+                loadData();
             } else {
                 alert("Please fill in all fields!");
             }
         }
+
+        // Function to load and display submitted data
+        function loadData() {
+            const storedData = JSON.parse(localStorage.getItem('submittedData')) || [];
+            const dataEntries = document.getElementById('dataEntries');
+            dataEntries.innerHTML = ''; // Clear any existing data
+
+            storedData.forEach(entry => {
+                const dataEntry = document.createElement('div');
+                dataEntry.classList.add('data-entry');
+                dataEntry.innerHTML = `
+                    <strong>Name:</strong> ${entry.name}<br>
+                    <strong>Number:</strong> ${entry.number}<br>
+                    <strong>Message:</strong> ${entry.message}
+                `;
+                dataEntries.appendChild(dataEntry);
+            });
+        }
+
+        // Load data on page load
+        window.onload = function() {
+            const enteredPassword = document.getElementById('password').value;
+            if (enteredPassword === password) {
+                document.getElementById('dataContainer').style.display = "block";
+                loadData();
+            }
+        };
     </script>
 
 </body>
