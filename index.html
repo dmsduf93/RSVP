@@ -3,136 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Your Data2</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-container {
-            margin-bottom: 20px;
-        }
-        .data-container {
-            margin-top: 20px;
-        }
-        .data-entry {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
-        }
-        .password-container {
-            margin-bottom: 20px;
-        }
-        .password-container input {
-            padding: 8px;
-            margin-right: 10px;
-        }
-        .data-container {
-            display: none;
-        }
-    </style>
+    <title>Contact Form</title>
 </head>
 <body>
-
-    <h1>Submit Your Data</h1>
-
-    <!-- Password Protection -->
-    <div class="password-container">
-        <label for="password">Enter Password to View Submitted Data: </label>
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="checkPassword()">Submit</button>
-    </div>
-
-    <!-- Form for data submission -->
-    <div class="form-container">
+    <h2>Contact Form</h2>
+    <form id="contact-form">
         <label for="name">Name:</label>
-        <input type="text" id="name" placeholder="Your Name">
-        <br><br>
+        <input type="text" id="name" name="name" required><br><br>
 
-        <label for="number">Number:</label>
-        <input type="text" id="number" placeholder="Your Number">
-        <br><br>
+        <label for="number">Phone Number:</label>
+        <input type="text" id="number" name="number" required><br><br>
 
         <label for="message">Message:</label>
-        <textarea id="message" placeholder="Enter your message"></textarea>
-        <br><br>
+        <textarea id="message" name="message" required></textarea><br><br>
 
-        <button onclick="submitData()">Submit</button>
-    </div>
+        <button type="submit">Submit</button>
+    </form>
 
-    <!-- Data Display Section (Initially Hidden) -->
-    <div class="data-container" id="dataContainer">
-        <h2>Submitted Data</h2>
-        <div id="dataEntries"></div>
-    </div>
-
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        const password = "1";  // Set the password here
+        // Initialize EmailJS
+        emailjs.init('YOUR_USER_ID'); // Replace YOUR_USER_ID with your EmailJS user ID
 
-        // Function to check the password
-        function checkPassword() {
-            const enteredPassword = document.getElementById('password').value;
-            if (enteredPassword === password) {
-                document.getElementById('dataContainer').style.display = "block";
-                alert("Password correct! You can now view the submitted data.");
-                loadData(); // Load the stored data after password is entered
-            } else {
-                alert("Incorrect password! Please try again.");
-            }
-        }
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
 
-        // Function to handle form data submission
-        function submitData() {
-            const name = document.getElementById('name').value;
-            const number = document.getElementById('number').value;
-            const message = document.getElementById('message').value;
+            // Get form values
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const number = formData.get('number');
+            const message = formData.get('message');
 
-            if (name && number && message) {
-                const entry = { name, number, message };
-                let storedData = JSON.parse(localStorage.getItem('submittedData')) || [];
-                storedData.push(entry);
-                localStorage.setItem('submittedData', JSON.stringify(storedData));
-
-                // Clear form fields after submission
-                document.getElementById('name').value = '';
-                document.getElementById('number').value = '';
-                document.getElementById('message').value = '';
-
-                // Load and display the updated data
-                loadData();
-            } else {
-                alert("Please fill in all fields!");
-            }
-        }
-
-        // Function to load and display submitted data
-        function loadData() {
-            const storedData = JSON.parse(localStorage.getItem('submittedData')) || [];
-            const dataEntries = document.getElementById('dataEntries');
-            dataEntries.innerHTML = ''; // Clear any existing data
-
-            storedData.forEach(entry => {
-                const dataEntry = document.createElement('div');
-                dataEntry.classList.add('data-entry');
-                dataEntry.innerHTML = `
-                    <strong>Name:</strong> ${entry.name}<br>
-                    <strong>Number:</strong> ${entry.number}<br>
-                    <strong>Message:</strong> ${entry.message}
-                `;
-                dataEntries.appendChild(dataEntry);
-            });
-        }
-
-        // Load data on page load
-        window.onload = function() {
-            const enteredPassword = document.getElementById('password').value;
-            if (enteredPassword === password) {
-                document.getElementById('dataContainer').style.display = "block";
-                loadData();
-            }
-        };
+            // Send email using EmailJS
+            emailjs.sendForm('service_4n7zide', 'template_8new6yf', this)
+                .then(function (response) {
+                    console.log('Success:', response);
+                    alert('Your message has been sent!');
+                }, function (error) {
+                    console.error('Error:', error);
+                    alert('There was an error sending your message.');
+                });
+        });
     </script>
-
 </body>
 </html>
