@@ -112,13 +112,28 @@
           font-size: 25px;
           text-align: center; /* Optional: Center the text */
         }
+        /* Add space between the text and the buttons */
+        .text-container {
+          margin-bottom: 20px; /* Adjust space between text and buttons */
+          font-family: 'Noto Serif KR', serif;
+          font-size: 20px;
+          text-align: center; /* Optional: Center the text */
+        }
       </style>
    </head>
 
    <body>
       <div class="background-container">
          <div class="title-container">
-            <h2>Contact Form update</h2>
+            <h2>참석 여부 전달 안내</h2>
+            <div class="text-container">
+               <p>
+                  특별한 날 축하의 마음으로 참석해주시는<br />
+                  모든 분들을 더욱 귀하게 모실 수 있도록<br />
+                  아래 기입란을 제출하여 신랑•신부에게<br />
+                  참석여부를 전달 부탁드립니다.<br />
+               </p>
+            </div>
             <form id="contact-form">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required><br>
