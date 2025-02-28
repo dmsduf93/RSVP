@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-      <meta name="description" content="라미, 은열의 결혼식 모바일 청첩장입니다.">
-      <meta name="author" content="Pachung">
-      <meta name="email" content="dmsduf93@naver.com">
-      <meta property="og:url" content="https://dmsduf93.github.io/Wedding-invitation-page" />
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content="Rahmi❤️EunYeol, 결혼합니다." />
-      <meta property="og:description" content="두 사람의 결혼을 축하해 주세요." />
-      <meta property="og:image" content="assets/img/couple.png" />
-      <meta property="og:site_name" content="Rahmi❤️EunYeol, 결혼합니다." />
-      <title>Rahmi❤️EunYeol, 결혼합니다.</title>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-      <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-   </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Table Input</title>
+</head>
+<body>
+    <h1>Submit your data</h1>
+    <form id="data-form">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="number">Number:</label><br>
+        <input type="text" id="number" name="number" required><br><br>
+        <label for="text">Any text:</label><br>
+        <textarea id="text" name="text" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
 
-   <body>
-   </body>
+    <h2>Submitted Data</h2>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Text</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data rows will be added here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to capture form submission
+        document.getElementById('data-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const number = document.getElementById('number').value;
+            const text = document.getElementById('text').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${name}</td><td>${number}</td><td>${text}</td>`;
+            document.querySelector('#data-table tbody').appendChild(row);
+
+            // Create a CSV string (just for local storage)
+            const csvData = `${name},${number},${text}\n`;
+
+            // You can add functionality here to send this data to your GitHub repository (using GitHub Actions or another service)
+            console.log(csvData);
+
+            // Clear form fields
+            document.getElementById('data-form').reset();
+        });
+    </script>
+</body>
 </html>
