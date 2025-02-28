@@ -3,56 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Table Input</title>
+    <title>Submit Your Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .data-container {
+            margin-top: 20px;
+        }
+        .data-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .password-container {
+            margin-bottom: 20px;
+        }
+        .password-container input {
+            padding: 8px;
+            margin-right: 10px;
+        }
+        .data-container {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Submit your data</h1>
-    <form id="data-form">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-        <label for="number">Number:</label><br>
-        <input type="text" id="number" name="number" required><br><br>
-        <label for="text">Any text:</label><br>
-        <textarea id="text" name="text" required></textarea><br><br>
-        <button type="submit">Submit</button>
-    </form>
 
-    <h2>Submitted Data</h2>
-    <table id="data-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Number</th>
-                <th>Text</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data rows will be added here -->
-        </tbody>
-    </table>
+    <h1>Submit Your Data</h1>
+
+    <!-- Password Protection -->
+    <div class="password-container">
+        <label for="password">Enter Password to View Submitted Data: </label>
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <!-- Form for data submission -->
+    <div class="form-container">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Your Name">
+        <br><br>
+
+        <label for="number">Number:</label>
+        <input type="text" id="number" placeholder="Your Number">
+        <br><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" placeholder="Enter your message"></textarea>
+        <br><br>
+
+        <button onclick="submitData()">Submit</button>
+    </div>
+
+    <!-- Data Display Section (Initially Hidden) -->
+    <div class="data-container" id="dataContainer">
+        <h2>Submitted Data</h2>
+        <div id="dataEntries"></div>
+    </div>
 
     <script>
-        // Function to capture form submission
-        document.getElementById('data-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+        const password = "12345";  // Set the password here
 
+        // Function to check the password
+        function checkPassword() {
+            const enteredPassword = document.getElementById('password').value;
+            if (enteredPassword === password) {
+                document.getElementById('dataContainer').style.display = "block";
+                alert("Password correct! You can now view the submitted data.");
+            } else {
+                alert("Incorrect password! Please try again.");
+            }
+        }
+
+        // Function to handle form data submission
+        function submitData() {
             const name = document.getElementById('name').value;
             const number = document.getElementById('number').value;
-            const text = document.getElementById('text').value;
+            const message = document.getElementById('message').value;
 
-            const row = document.createElement('tr');
-            row.innerHTML = `<td>${name}</td><td>${number}</td><td>${text}</td>`;
-            document.querySelector('#data-table tbody').appendChild(row);
+            if (name && number && message) {
+                const dataEntry = document.createElement('div');
+                dataEntry.classList.add('data-entry');
 
-            // Create a CSV string (just for local storage)
-            const csvData = `${name},${number},${text}\n`;
+                dataEntry.innerHTML = `
+                    <strong>Name:</strong> ${name}<br>
+                    <strong>Number:</strong> ${number}<br>
+                    <strong>Message:</strong> ${message}
+                `;
 
-            // You can add functionality here to send this data to your GitHub repository (using GitHub Actions or another service)
-            console.log(csvData);
+                document.getElementById('dataEntries').appendChild(dataEntry);
 
-            // Clear form fields
-            document.getElementById('data-form').reset();
-        });
+                // Clear form fields after submission
+                document.getElementById('name').value = '';
+                document.getElementById('number').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert("Please fill in all fields!");
+            }
+        }
     </script>
+
 </body>
 </html>
