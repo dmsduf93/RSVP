@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form Update</title>
-    <style>
-        /* Apply styles to center-align content */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-image: url('background.png'); /* Path to your background image */
-            background-size: cover; /* Make sure the image covers the whole screen */
-            background-position: center center; /* Center the image */
+   <head>
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+      <meta name="description" content="라미, 은열의 결혼식 모바일 청첩장입니다.">
+      <meta name="author" content="Pachung">
+      <meta name="email" content="dmsduf93@naver.com">
+      <meta property="og:url" content="https://dmsduf93.github.io/Wedding-invitation-page" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Rahmi❤️EunYeol, 결혼합니다." />
+      <meta property="og:description" content="두 사람의 결혼을 축하해 주세요." />
+      <meta property="og:image" content="assets/img/couple.png" />
+      <meta property="og:site_name" content="Rahmi❤️EunYeol, 결혼합니다." />
+      <title>Rahmi❤️EunYeol, 결혼합니다.</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+      
+      <style>
+        body, html {
+          height: 100%;
+          margin: 0;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #f0f8ff;
+        }
+
+        .background-container {
+          position: relative;
+          width: 80vw;  /* Ensure the container is in portrait orientation */
+          height: 100vh;
+          background-image: url('main_background.png'); /* Add your image URL here */
+          background-size: contain; /* Ensures the image maintains its aspect ratio */
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          overflow: hidden;  /* Ensures flowers don't spill outside this container */
+          display: flex;
+          flex-direction: column; /* Stack the elements vertically */
+          justify-content: center;
+          align-items: center; /* Center the content vertically */
         }
 
         h2 {
@@ -61,24 +87,88 @@
         button:hover {
             background-color: #45a049;
         }
-    </style>
-</head>
-<body>
-    <div>
-        <h2>Contact Form update</h2>
-        <form id="contact-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br>
+          
+        .falling-flower {
+          position: absolute; /* Make sure it is relative to the background-container */
+          top: -10px;
+          animation: fall 10s infinite linear;
+        }
 
-            <label for="number">Phone Number:</label>
-            <input type="text" id="number" name="number" required><br>
+        @keyframes fall {
+          0% {
+            top: -10px;
+            transform: rotate(0deg);
+          }
+          100% {
+            top: 100%;
+            transform: rotate(360deg);
+          }
+        }
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea><br>
+        /* Add space between the text and the buttons */
+        .title-container {
+          margin-bottom: 20px; /* Adjust space between text and buttons */
+          font-family: 'Noto Serif KR', serif;
+          font-size: 25px;
+          text-align: center; /* Optional: Center the text */
+        }
+      </style>
+   </head>
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+   <body>
+      <div class="background-container">
+         <div class="title-container">
+            <h2>Contact Form update</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+            
+                <label for="number">Phone Number:</label>
+                <input type="text" id="number" name="number" required><br>
+            
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea><br>
+            
+                <button type="submit">Submit</button>
+            </form>
+         </div>
+      </div>
+
+      <script>
+        // Create falling flowers
+        const flowerImages = [
+          "flower.png", // Flower icon image URL
+        ];
+      
+        function createFallingFlower() {
+          const flower = document.createElement("img");
+          flower.src = flowerImages[0];
+          flower.classList.add("falling-flower");
+      
+          // Set random size for each flower (for variety)
+          const flowerSize = Math.random() * 5 + 8; // Random size between 10px and 40px
+          flower.style.width = `${flowerSize}px`; 
+          flower.style.height = `${flowerSize}px`;
+      
+          // Get the width of the container and randomize the flower's horizontal position inside it
+          const container = document.querySelector('.background-container');
+          const containerWidth = container.offsetWidth;
+          flower.style.left = `${Math.random() * containerWidth}px`;  // Random horizontal position within container
+
+          // Set a random speed for each flower's falling animation
+          flower.style.animationDuration = `${Math.random() * 5 + 5}s`;  // Random speed between 5s and 10s
+
+          container.appendChild(flower);
+      
+          // Remove the flower when it has finished falling
+          flower.addEventListener("animationiteration", () => {
+            flower.remove();
+          });
+        }
+      
+        // Create flowers at regular intervals
+        setInterval(createFallingFlower, 200);
+      </script>
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
@@ -106,5 +196,6 @@
                 });
         });
     </script>
-</body>
+
+   </body>
 </html>
