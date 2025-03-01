@@ -208,7 +208,7 @@
                 <label for="number">인원:</label>
                 <input type="text" id="number" name="number" required><br>
             
-                <label for="message">전하고싶으신 말:</label>
+                <label for="message">축하 메시지:</label>
                 <textarea id="message" name="message" required></textarea><br>
             
                 <button type="submit">Submit</button>
@@ -232,7 +232,7 @@
                     alert('제출이 완료되었습니다.');
                 }, function (error) {
                     console.error('Error:', error);
-                    alert('오류가 발생하였습니다.');
+                    alert('제출에 실패하였습니다.');
                 });
         });
       </script>
