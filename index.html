@@ -221,20 +221,21 @@
         // Initialize EmailJS
         emailjs.init('zNlaqaX53MJFOmei0'); // Replace with your EmailJS user ID
 
-        // Handle form submission
-        document.getElementById('contact-form').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
-
-            // Send email using EmailJS
-            emailjs.sendForm('service_4n7zide', 'template_8new6yf', this)
-                .then(function (response) {
-                    console.log('Success:', response);
-                    alert('제출이 완료되었습니다.');
-                }, function (error) {
-                    console.error('Error:', error);
-                    alert('제출에 실패하였습니다.\n계속해서 제출에 실패할 경우 관리자에게 알려주세요.');
-                });
-        });
+      // Handle form submission
+      document.getElementById('contact-form').addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent the form from submitting the traditional way
+      
+          // Send email using EmailJS
+          emailjs.sendForm('service_4n7zide', 'template_8new6yf', this)
+              .then(function (response) {
+                  console.log('Success:', response);
+                  alert('제출이 완료되었습니다.');
+                  location.reload(); // Refresh the page after success
+              }, function (error) {
+                  console.error('Error:', error);
+                  alert('제출에 실패하였습니다.\n계속해서 제출에 실패할 경우 관리자에게 알려주세요.');
+              });
+      });
       </script>
       
       <script>
