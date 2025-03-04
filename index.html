@@ -72,6 +72,10 @@
          
             /* Media query for mobile (up to 1023px) */
          @media (max-width: 1023px) {
+           .background-container {
+             background-size: contain; /* Ensure the background fits within the screen, but doesn't get cut off */
+             background-position: center center; /* Adjust background position for mobile */
+           }
            .title-container{
              margin-top: 90px;
              margin-bottom: 2px;
@@ -127,7 +131,7 @@
          
          /* Optional: Adjust text sizes on larger screens if needed */
          @media (min-width: 1024px) {
-           .title-container {
+            .title-container {
              margin-top: 90px;
              margin-bottom: 5px;
              font-family: 'Noto Serif KR', serif;
